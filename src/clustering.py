@@ -3,7 +3,7 @@ from sklearn.cluster import KMeans
 import joblib
 
 def cluster_users(X, k=4):
-    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
     labels = kmeans.fit_predict(X)
     joblib.dump(kmeans, 'models/clustering_model.pkl')
     return labels
