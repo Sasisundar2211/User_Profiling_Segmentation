@@ -4,6 +4,7 @@ from src.data_preprocessing import preprocess_data
 from src.feature_engineering import engineer_features
 from src.clustering import cluster_users
 import os
+import joblib
 
 # Load dataset
 df = pd.read_csv("data/user_profiles_for_ads.csv")
@@ -12,10 +13,13 @@ df = pd.read_csv("data/user_profiles_for_ads.csv")
 df = engineer_features(df)
 
 # Preprocess features
-X, _ = preprocess_data(df)
+X, preprocessor = preprocess_data(df)
 
 # Make sure models folder exists
 os.makedirs("models", exist_ok=True)
+
+# Save the preprocessor for use during predictions
+joblib.dump(preprocessor, "models/preprocessor.pkl")
 
 # Perform clustering and save model
 labels = cluster_users(X, k=4)
@@ -26,4 +30,5 @@ os.makedirs("outputs", exist_ok=True)
 df.to_csv("outputs/segmented_users.csv", index=False)
 
 print("✅ clustering_model.pkl saved to 'models/'")
+print("✅ preprocessor.pkl saved to 'models/'")
 print("✅ Segmented users saved to 'outputs/segmented_users.csv'")
