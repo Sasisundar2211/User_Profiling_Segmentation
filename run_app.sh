@@ -1,3 +1,2 @@
 #!/bin/bash
-export FLASK_APP=app/main.py
-flask run
+python -m app.main

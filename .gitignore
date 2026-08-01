@@ -1,20 +1,6 @@
-# Byte-compiled / cache files
 __pycache__/
 *.py[cod]
-
-# Virtual environments
+.venv/
 venv/
-.env/
-
-# VS Code settings
-.vscode/
-
-# Data / outputs
-*.csv
-*.pkl
-*.h5
-*.db
-
-# OS files
-.DS_Store
-Thumbs.db
+models/
+outputs/segmented_users.csv
