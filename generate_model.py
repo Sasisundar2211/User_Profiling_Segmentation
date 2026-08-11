@@ -3,6 +3,7 @@ import pandas as pd
 from src.data_preprocessing import preprocess_data
 from src.feature_engineering import engineer_features
 from src.clustering import cluster_users
+from src.profiling import profile_segments
 import os
 
 # Load dataset
@@ -20,8 +21,10 @@ os.makedirs("models", exist_ok=True)
 # Perform clustering and save model
 labels = cluster_users(X, k=4)
 
+# Assign segments and build profiles
+profile_segments(df, labels)
+
 # Save segmented output
-df['segment'] = labels
 os.makedirs("outputs", exist_ok=True)
 df.to_csv("outputs/segmented_users.csv", index=False)
 
